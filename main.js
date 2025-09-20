@@ -75,8 +75,10 @@ const observer = new IntersectionObserver(
   },
   { threshold: 0.08 },
 );
-const watchSections = () =>
+
+function watchSections() {
   document.querySelectorAll('section[data-animate="in"]').forEach((el) => observer.observe(el));
+}
 
 /* Support deep links */
 if (location.hash) {
