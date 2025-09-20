@@ -8,6 +8,9 @@ const sidebar = document.getElementById("sidebar");
 const toggleBtn = document.querySelector(".menu-toggle");
 const backdrop = document.getElementById("backdrop");
 
+/* add predeclaration for IntersectionObserver */
+let observer;
+
 function renderTOC(list) {
   tocEl.innerHTML = "";
   list.forEach((s) => {
@@ -67,7 +70,7 @@ tocEl.addEventListener("click", (e) => {
 });
 
 /* Section reveal on scroll */
-const observer = new IntersectionObserver(
+observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((en) => {
       if (en.isIntersecting) en.target.classList.add("visible");
