@@ -73,6 +73,11 @@ body {
   font-size: 26px; line-height: 1.2; margin: 18px 0 10px;
 }
 .content h3 { font-size: 18px; margin: 16px 0 8px; }
+.content p, .content li, pre code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+pre, code { white-space: pre-wrap; }
 .content p { margin: 8px 0; }
 .content ul { margin: 8px 0 8px 18px; }
 kbd {
@@ -116,6 +121,11 @@ blockquote {
   }
   .sidebar.open { transform: translateX(0); }
   .title { font-size: 16px; }
+  body { font-size: 17px; line-height: 1.6; }
+  .content { padding: 12px 12px 20px; }
+  .content h2 { font-size: 22px; }
+  .content h3 { font-size: 16px; }
+  pre { font-size: 12px; padding: 12px; max-height: 50vh; -webkit-overflow-scrolling: touch; }
 }
 
 /* Subtle fade-in */
