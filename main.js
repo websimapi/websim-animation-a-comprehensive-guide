@@ -10,6 +10,11 @@ const backdrop = document.getElementById("backdrop");
 
 /* add predeclaration for IntersectionObserver */
 let observer;
+/* initialize IntersectionObserver before first render */
+observer = new IntersectionObserver(
+  (entries) => entries.forEach((en) => { if (en.isIntersecting) en.target.classList.add("visible"); }),
+  { threshold: 0.08 },
+);
 
 function renderTOC(list) {
   tocEl.innerHTML = "";
@@ -70,14 +75,7 @@ tocEl.addEventListener("click", (e) => {
 });
 
 /* Section reveal on scroll */
-observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((en) => {
-      if (en.isIntersecting) en.target.classList.add("visible");
-    });
-  },
-  { threshold: 0.08 },
-);
+// remove late IntersectionObserver initialization (moved above)
 
 function watchSections() {
   document.querySelectorAll('section[data-animate="in"]').forEach((el) => observer.observe(el));
