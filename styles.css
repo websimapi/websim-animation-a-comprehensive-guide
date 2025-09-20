@@ -38,14 +38,8 @@ body {
 }
 .menu-toggle:active { transform: scale(0.98); box-shadow: var(--shadow); }
 
-.app-layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100dvh - 64px); }
-.sidebar {
-  border-right: 1px solid var(--border);
-  padding: 12px;
-  position: sticky; top: 57px; height: calc(100dvh - 57px);
-  overflow: auto;
-  background: #fff;
-}
+.app-layout { display: grid; grid-template-columns: 1fr; min-height: calc(100dvh - 64px); }
+.sidebar { display: none !important; }
 .search input {
   width: 100%;
   padding: 10px 12px;
@@ -132,10 +126,7 @@ blockquote {
 section[data-animate="in"] { opacity: 0; transform: translateY(6px); }
 section[data-animate="in"].visible { opacity: 1; transform: none; transition: all .24s ease; }
 
-.backdrop {
-  position: fixed; inset: 57px 0 0 0; background: rgba(0,0,0,.35);
-  opacity: 0; transition: opacity .18s ease; z-index: 24;
-}
+.backdrop { display: none !important; }
 .backdrop.show { opacity: 1; }
 .backdrop[hidden] { display: none !important; }
 body.sidebar-open { overflow: hidden; }
