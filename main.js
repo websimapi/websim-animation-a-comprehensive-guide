@@ -6,6 +6,7 @@ const contentEl = document.getElementById("content");
 const searchEl = document.getElementById("search");
 const sidebar = document.getElementById("sidebar");
 const toggleBtn = document.querySelector(".menu-toggle");
+const backdrop = document.getElementById("backdrop");
 
 function renderTOC(list) {
   tocEl.innerHTML = "";
@@ -28,6 +29,7 @@ function renderContent(list) {
     sec.innerHTML = `<h2>${s.title}</h2>${s.body}`;
     contentEl.appendChild(sec);
   });
+  watchSections(); enhanceCodeBlocks();
 }
 
 renderTOC(sections);
@@ -50,11 +52,16 @@ searchEl.addEventListener("input", (e) => {
 toggleBtn.addEventListener("click", () => {
   const open = !sidebar.classList.contains("open");
   sidebar.classList.toggle("open", open);
+  document.body.classList.toggle("sidebar-open", open);
+  backdrop.hidden = !open; backdrop.classList.toggle("show", open);
   toggleBtn.setAttribute("aria-expanded", String(open));
 });
+
 tocEl.addEventListener("click", (e) => {
   if (e.target.closest("a")) {
     sidebar.classList.remove("open");
+    document.body.classList.remove("sidebar-open");
+    backdrop.hidden = true; backdrop.classList.remove("show");
     toggleBtn.setAttribute("aria-expanded", "false");
   }
 });
@@ -70,7 +77,6 @@ const observer = new IntersectionObserver(
 );
 const watchSections = () =>
   document.querySelectorAll('section[data-animate="in"]').forEach((el) => observer.observe(el));
-watchSections();
 
 /* Support deep links */
 if (location.hash) {
@@ -80,6 +86,25 @@ if (location.hash) {
 
 /* Keyboard: focus main with "f" */
 window.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "f") contentEl.focus();
+  if (e.key === "Escape" && sidebar.classList.contains("open")) backdrop.click();
 });
 
+function enhanceCodeBlocks() {
+  document.querySelectorAll("pre").forEach((pre) => {
+    if (pre.dataset.enhanced) return;
+    pre.dataset.enhanced = "1"; const btn = document.createElement("button");
+    btn.className = "copy-btn"; btn.type = "button"; btn.textContent = "Copy";
+    btn.addEventListener("click", async () => {
+      const code = pre.querySelector("code")?.innerText || pre.innerText;
+      try { await navigator.clipboard.writeText(code); btn.textContent = "Copied"; setTimeout(()=>btn.textContent="Copy",1200); }
+      catch { btn.textContent = "Error"; setTimeout(()=>btn.textContent="Copy",1200); }
+    });
+    pre.appendChild(btn);
+  });
+}
+
+backdrop.addEventListener("click", () => {
+  sidebar.classList.remove("open"); document.body.classList.remove("sidebar-open");
+  backdrop.hidden = true; backdrop.classList.remove("show");
+  toggleBtn.setAttribute("aria-expanded", "false");
+});

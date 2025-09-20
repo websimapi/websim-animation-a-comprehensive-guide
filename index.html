@@ -27,7 +27,7 @@
   </head>
   <body>
     <header class="app-header">
-      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
       <h1 class="title">Animation: Everything You Need To Know</h1>
     </header>
 
@@ -38,6 +38,8 @@
         </div>
         <nav id="toc" class="toc"></nav>
       </aside>
+
+      <div class="backdrop" id="backdrop" hidden></div>
 
       <main id="content" class="content" tabindex="-1" role="main" aria-live="polite"></main>
     </div>
@@ -51,4 +53,3 @@
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
-

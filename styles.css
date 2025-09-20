@@ -30,7 +30,8 @@ body {
   border: 1px solid var(--border);
   background: #fff;
   border-radius: 10px;
-  padding: 8px 10px;
+  padding: 12px 14px;
+  min-width: 44px; min-height: 44px;
   font-size: 18px;
   line-height: 1;
   transition: transform .12s ease, box-shadow .12s ease;
@@ -64,8 +65,10 @@ body {
   padding: 20px;
   max-width: 900px;
   width: 100%;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
 }
 .content section { margin: 0 0 40px; }
+.content h2, .content h3 { scroll-margin-top: 70px; }
 .content h2 {
   font-size: 26px; line-height: 1.2; margin: 18px 0 10px;
 }
@@ -85,7 +88,13 @@ pre {
   background: #0a0a0a; color: #f5f5f5;
   padding: 14px; border-radius: 12px; overflow: auto;
   box-shadow: var(--shadow);
+  position: relative;
 }
+pre .copy-btn {
+  position: absolute; top: 8px; right: 8px; border: 1px solid var(--border);
+  background: #111; color: #fff; font-size: 12px; padding: 4px 8px; border-radius: 8px;
+}
+pre .copy-btn:active { transform: scale(0.98); }
 blockquote {
   margin: 12px 0; padding: 10px 14px; border-left: 3px solid var(--border); color: var(--muted);
   background: #fafafa; border-radius: 6px;
@@ -101,7 +110,7 @@ blockquote {
 @media (max-width: 960px) {
   .app-layout { grid-template-columns: 1fr; }
   .sidebar {
-    position: fixed; inset: 57px 0 0 auto; width: 84%;
+    position: fixed; inset: 57px 0 0 auto; width: 86%;
     transform: translateX(-105%); transition: transform .18s ease;
     box-shadow: var(--shadow); z-index: 25;
   }
@@ -113,3 +122,10 @@ blockquote {
 section[data-animate="in"] { opacity: 0; transform: translateY(6px); }
 section[data-animate="in"].visible { opacity: 1; transform: none; transition: all .24s ease; }
 
+.backdrop {
+  position: fixed; inset: 57px 0 0 0; background: rgba(0,0,0,.35);
+  opacity: 0; transition: opacity .18s ease; z-index: 24;
+}
+.backdrop.show { opacity: 1; }
+.backdrop[hidden] { display: none !important; }
+body.sidebar-open { overflow: hidden; }
